@@ -8,7 +8,7 @@ This project, developed as part of CS310: Software Engineering at the College of
   
 - **Projected Amounts**: The tool returns a projected amount based on user input for income and estimated spending, allowing users to forecast future financial situations.
 
-- **Monthly/Weekly Expenses**: Users can break down their expenses by monthly or weekly timeframes to get a clearer picture of their short- and long-term financial commitments.
+- **Monthly/Weekly Expenses**: Users can break down their expenses by monthly or weekly timeframes to better understand their short- and long-term financial commitments.
 
 - **User Input**: The tool accepts manual user input for income, expenses, and financial goals, making it customizable to individual financial circumstances.
 
@@ -19,7 +19,7 @@ This project, developed as part of CS310: Software Engineering at the College of
   - 30% is allocated to wants (e.g., entertainment, dining out).
   - 20% is allocated to savings or paying down debt.
 
-- **Income Tracking (Bi-weekly/Weekly)**: Users can input their income on a bi-weekly or weekly basis to match their pay schedule and budget accordingly.
+- **Income Tracking (Bi-weekly/Weekly)**: Users can input their income bi-weekly or weekly to match their pay schedule and budget accordingly.
 
 - **Budget (Monthly/Weekly/Daily)**: The tool allows users to set and adjust their budget on a monthly, weekly, or daily basis depending on their financial needs.
 
@@ -37,6 +37,9 @@ This project, developed as part of CS310: Software Engineering at the College of
 1. Clone the repository:
    ```bash
    git clone https://github.com/username/budget-planner.git
+   cd budget-planner
+   npm install
+   npm start
 
 ## Contributors
 1. Kai Francis
