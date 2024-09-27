@@ -1,7 +1,7 @@
 # Project 2: Budget Planning Tool
 
 ## Overview
-This project, developed as part of CS310: Software Engineering at the College of Wooster, focuses on creating a **Budget Planning Tool**. The tool is designed to help users track and manage their personal finances efficiently by allowing them to set budgets, monitor expenses, and visualize their spending habits.
+This project, developed as part of CS230: Software Engineering at the College of Wooster, focuses on creating a **Budget Planning Tool**. The tool is designed to help users track and manage their personal finances efficiently by allowing them to set budgets, monitor expenses, and visualize their spending habits.
 
 ## Features
 - **Financial Goals**: Users can set financial goals, such as saving for a purchase or building an emergency fund, and track their progress toward these goals over time.
