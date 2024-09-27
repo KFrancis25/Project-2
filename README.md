@@ -28,9 +28,9 @@ This project, developed as part of CS310: Software Engineering at the College of
 - **Comparison (Monthly/Weekly/Daily)**: Users can compare their spending and budgeting habits across different timeframes (monthly, weekly, or daily) to see how their financial behavior evolves over time.
 
 ## Technology Stack
-- **Frontend**: ReactJS
-- **Backend**: Node.js / Express
-- **Database**: MongoDB
+- **Frontend**: TBD
+- **Backend**: TBD
+- **Database**: TBD
 - **Version Control**: Git/GitHub
 
 ## Installation
