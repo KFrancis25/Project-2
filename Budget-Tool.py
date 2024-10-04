@@ -63,10 +63,6 @@ def emergency_fund():
         return True
     print(f"You can use this amount{money}")
     BudgetApp.set_income = BudgetApp.set_income + money
-    
-def paid_toward_goal(payment, goal):
-    total_left = goal.cost - payment
-    print(total_left)
 
 #Main
 def main():
