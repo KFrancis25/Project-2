@@ -50,6 +50,11 @@ class Goals:
         self.cost = cost
         self.weeks = weeks
         print(f"My goal is to buy a {self.goal} in {self.weeks} weeks. It cost ${self.cost}")
+    
+    def payment(self, money):
+        cost = self.cost
+        total_left = self.cost - money
+        print(total_left)
         
 
 def emergency_fund():

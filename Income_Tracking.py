@@ -8,8 +8,8 @@ class Income_Tracking:
 
     def load_income_data(): 
         with open('income_data.csv', newline='') as csvfile:
-            reader = csv.DictReader(csvfile)
             fieldnames = ['daily', 'weekly', 'monthly']
+            reader = csv.DictReader(csvfile, fieldnames=fieldnames)
             print(reader.fieldnames)
         for row in reader:
             print(row['daily'], row['weekly', row['monthly']])
