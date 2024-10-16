@@ -7,8 +7,20 @@ class BudgetApp:
         self.savings_goal = 0
         self.bank_balance = 0
     
-    def set_income(self):
-        self.income = float(input("Enter your monthly income: $"))
+    def add_income(self):
+        self.income = self.income + float(input("Enter income amount to be added: "))
+
+    def remove_income(self):
+        remove_income = float(input("Enter income amount to be removed: "))
+        if self.income - remove_income < 0:
+            print("Error: Not enough income")
+            return
+        else:
+            self.income = self.income - remove_income
+            return
+        
+    def get_income(self):
+        return self.income
 
     def add_expense(self):
         while True:
@@ -61,8 +73,8 @@ class BudgetApp:
         wants_allocated = self.bank_balance * 0.3
         savings_allocated = self.bank_balance * 0.2
         return needs_allocated, wants_allocated, savings_allocated
-#Ryan Yonek
-#50-20-30 Rule (try to use the same function name in main)
+
+
 
 #Keith Young
 #Personal Purchase Goals
@@ -76,17 +88,22 @@ class Goals:
         
     #Payment towards the goal
     def payment(self, money):
-        cost = self.cost
-        total_left = cost - money
-        print(total_left)
+        try:
+            cost = self.cost
+            total_left = cost - money
+            print(total_left)
+        except:
+            money < BudgetApp.get_income * 0.3
+            print("You don't have enough money right now")
         
 #emergency fund creation
-def emergency_fund():
-    money = 500
-    if money < (BudgetApp.set_income * .10):
-        return True
-    print(f"You can use this amount{money}")
-    BudgetApp.set_income = BudgetApp.set_income + money
+# Need to make a method that takes money from the uses
+def emergency_fund(self, deposit, account):
+    if deposit < (BudgetApp.get_income * .10):
+        print(f"You want add this amount {deposit} to emergency fund.")
+        account += deposit
+    else:
+        print("You are puttting too much in your emergency fund!!!")
 
 #Main
 def main():
@@ -99,7 +116,8 @@ def main():
         print("2. Projected Amount")
         print("3. Monthly/Weekly Expenses")
         print("4. Income tracking (50-20-30 Rule)")
-        print("5. Exit")
+        print("5. Income Adjustment")
+        print("6. Exit")
 
 
         try:
@@ -115,6 +133,7 @@ def main():
             #error: cannot run because set_savings_goal does not exist
             print(f"Savings goals set to ${app.set_savings_goal:.2f}")
             set_goal = input("Do you want to create a personal goal?: Enter y/n ")
+            # Ask the user if they want to set personal purchase goal. If answer is yes it will record their goal.
             try: 
                 print(set_goal)
             except:
@@ -125,6 +144,7 @@ def main():
                 ask_cost = int(input("What is the cost? ")) 
                 ask_weeks = int(input("In how many weeks do you want to accomplish this goal?"))
                 personal_goal = Goals(ask_goal, ask_cost, ask_weeks)
+                print(personal_goal)
             else:
                 print("No personal goal!")
     
@@ -132,10 +152,9 @@ def main():
         elif choice == 2:
             #calculate and display projected amount
             print("\n--- Projected Amount ---")
-            app.set_income()
             app.add_expense()
             projected = app.calculate_projected_amount()
-            print(f"Projected ampunt after expenses: ${projected:.2f}")
+            print(f"Projected amount after expenses: ${projected:.2f}")
 
         elif choice == 3:
             #Display monthly/weekly expenses
@@ -148,11 +167,28 @@ def main():
         elif choice == 4:
             #Income tracking using the 50-20-30 rule
             print("\n--- Income tracking (50-20-30 Rule) ---")
-            app.set_income()
             needs, wants, savings = app.calculate_50_30_20_rule()
             print(f"Needs: ${needs:.2f}, Wants: ${wants:.2f}, Savings: ${savings:.2f}")
-        
+            
         elif choice == 5:
+            # Adding or removing income
+            print("\n--- Income Adjustment ---")
+            print("1. Add to total income")
+            print("2. Remove from total income")
+            try:
+                adjchoice = int(input("Enter your choice (1-2): "))
+            except ValueError:
+                print("Please enter a valid choice (1-2).")
+                continue
+            if adjchoice == 1:
+                app.add_income()
+                print(f"New total income is: ${app.income:.2f}")
+            if adjchoice == 2:
+                app.remove_income()
+                print(f"New total income is: ${app.income:.2f}")
+            
+
+        elif choice == 6:
             #exit the program
             print("Exiting the program Thank you!")
             break
