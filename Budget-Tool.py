@@ -4,9 +4,11 @@ class BudgetApp:
     def __init__(self):
         self.income = 0
         self.expenses = {}
-        self.savings_goal = 0
         self.bank_balance = 0
         self.account = 0
+        self.goal = ""
+        self.cost = 0
+        self.weeks = 0
         
     # Ryan Yonek
     # Adds income to total income
@@ -23,10 +25,6 @@ class BudgetApp:
         else:
             self.income = self.income - remove_income
             return
-    
-    # Returns income amount
-    def get_income(self):
-        return self.income
 
     # Add an expense by category and amount
     # Stores expense in the expenses dictionary
@@ -43,12 +41,6 @@ class BudgetApp:
                     self.expenses[category] = amount
             except ValueError:
                 print("Please enter a valid number.")
-    
-    def set_savings_goal(self):
-        try:
-            self.savings_goal = float(input("Enter your savings goal: $"))
-        except ValueError:
-            print("Please enter a vaild number.")
     
     def calculate_projected_amount(self):
         total_expenses = sum(self.expenses.values())
@@ -97,31 +89,25 @@ class BudgetApp:
     def get_emergency_fund(self):
         return self.account
 
-
-
-#Keith Young
-#Personal Purchase Goals
-# Sets the goal its costs and how many weeks a person has to achieve it
-class Goals:
-    def __init__(self, goal, cost, weeks):
-        self.goal = goal
-        self.cost = cost
-        self.weeks = weeks
-    
-    def check_goal(self):
-        return self.goal, self.cost, self.weeks
+    # Keith Young and Ryan Yonek
+    # Personal Purchase Goals
+    # Sets the goal its costs and how many weeks a person has to achieve it
+    def set_savings_goal(self, Goal, Cost, Weeks):
+        self.goal = Goal
+        self.cost = Cost
+        self.weeks = Weeks
         
     #Payment towards the goal
     def payment(self, money):
-        try:
-            cost = self.cost
-            total_left = cost - money
-            print(total_left)
-        except:
-            money < self.get_income() * 0.3
-            print("You don't have enough money right now")
-        
-
+        if money > self.income * 0.3:
+                print("You don't have enough money right now. Use Income Adjustment to add money.")
+        else:
+            self.cost = self.cost - money
+            self.income = self.income - money
+            self.weeks = self.weeks - 1
+            if self.cost == 0:
+                print("Goal reached!")
+            
 
 #Main
 def main():
@@ -148,36 +134,30 @@ def main():
         if choice == 1:
             #set financial goals
             print("\n--- Financial Goals ---")
-            app.set_savings_goal()
-            #error: cannot run because set_savings_goal does not exist
-            print(f"Savings goal set to: ${app.savings_goal:.2f}")
-            set_goal = input("Do you want to create a personal goal?: Enter y/n ")
+            if app.cost > 0:
+                print(f"My current goal is to buy a {app.goal} in {app.weeks} weeks. It costs ${app.cost:.2f}")
+            set_goal = input("Do you want to create a new personal goal?: Enter y/n ")
             # Ask the user if they want to set personal purchase goal. If answer is yes it will record their goal.
             try: 
                 if set_goal == 'y':
                     ask_goal = input("What are you saving for? ")
                     ask_cost = int(input("What is the cost? $")) 
                     ask_weeks = int(input("In how many weeks do you want to accomplish this goal? "))
-                    goals = Goals(ask_goal, ask_cost, ask_weeks)
-                    print(f"My goal is to buy a {goals.goal} in {goals.weeks} weeks. It cost ${goals.cost}")
-                    add_to_goal = input("Do you want to make a payment to the personal goal?: Enter y/n ")
-                    try:
-                        if add_to_goal == 'y':
-                            money = input("How much would you like to pay towards the goal? $")
-                            goals.payment(money)
-                            print("Current goal is now: ", goals.check_goal())
-                        if add_to_goal == 'n':
-                            print("Back to main menu")
-                    except:
-                        if set_goal != "y" or "n":
-                            print("Enter a y or n for yes or no!")
+                    app.set_savings_goal(ask_goal, ask_cost, ask_weeks)
+                    print(f"My goal is to buy a {app.goal} in {app.weeks} weeks. It costs ${app.cost:.2f}")
                 if set_goal == 'n':
-                    print("No savings goal set. Back to main menu")
+                    print("No new savings goal set.")
             except:
                 if set_goal != "y" or "n":
                     print ("Enter a y or n for yes or no!")
-            else:
-                print("No personal goal! Did not enter 'y' or 'n'. Back to main menu.")
+            add_to_goal = input("Do you want to make a payment to the personal goal?: Enter y/n ")
+            if add_to_goal == 'y':
+                money = int(input("How much would you like to pay towards the goal this week? $"))
+                app.payment(money)
+                if app.cost > 0:
+                    print(f"My goal is now to buy a {app.goal} in {app.weeks} weeks. It now costs ${app.cost:.2f}")
+            if add_to_goal == 'n':
+                print("No payment made to savings goal. Back to main menu")
 
     
 
