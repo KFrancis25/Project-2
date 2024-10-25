@@ -78,7 +78,7 @@ class BudgetApp:
     #emergency fund creation
     # Keith Young, Ryan Yonek
     def emergency_fund(self, deposit):
-        if deposit < (self.get_income() * .10):
+        if deposit < (self.income * .10):
             print(f"You want add {deposit} to your emergency fund.")
             self.account += deposit
         else:
@@ -116,6 +116,8 @@ def main():
     while True:
         #feature selction
         print("\nChoose a feature:")
+        if app.income > 0:
+            print("Current income is: $", app.income)
         print("1. Financial Goals")
         print("2. Projected Amount")
         print("3. Monthly/Weekly Expenses")
@@ -187,12 +189,13 @@ def main():
             print("\n--- Income Adjustment ---")
             print("1. Add to total income")
             print("2. Remove from total income")
-            print("3. Reset income to 0")
-            print("4. Back to main menu.")
+            print("3. Check current income")
+            print("4. Reset income to 0")
+            print("5. Back to main menu.")
             try:
-                adjchoice = int(input("Enter your choice (1-4): "))
+                adjchoice = int(input("Enter your choice (1-5): "))
             except ValueError:
-                print("Please enter a valid choice (1-4).")
+                print("Please enter a valid choice (1-5).")
                 continue
             if adjchoice == 1:
                 app.add_income()
@@ -201,14 +204,16 @@ def main():
                 app.remove_income()
                 print(f"New total income is: ${app.income:.2f}")
             if adjchoice == 3:
+                print(f"Total income is: ${app.income:.2f}")
+            if adjchoice == 4:
                 app.income = 0
                 print(f"New total income is: ${app.income:.2f}")
-            if adjchoice == 4:
+            if adjchoice == 5:
                 print("Exiting back to main budget menu.")
                                
 
         elif choice == 6:
-            emergency_money = int(input("How much would you like to add to your emergency fund? "))
+            emergency_money = int(input("How much would you like to add to your emergency fund? $"))
             app.emergency_fund(emergency_money)
             try:
                 check_fund = input("Do you want to see emergency fund? y or n ")
