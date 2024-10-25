@@ -81,6 +81,7 @@ class BudgetApp:
         if deposit < (self.income * .10):
             print(f"You want add {deposit} to your emergency fund.")
             self.account += deposit
+            self.income = self.income - deposit
         else:
             print("You are putting too much in your emergency fund!!!")
     
